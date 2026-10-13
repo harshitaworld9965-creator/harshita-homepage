@@ -4,10 +4,11 @@ import Banner from './components/Banner.jsx';
 import Blinkies from './components/Blinkies.jsx';
 import SiteMap from './components/SiteMap.jsx';
 import MusicPlayer from './components/MusicPlayer.jsx';
+import Content from './components/Content.jsx';
 
 export default function App() {
   // which page the middle box shows. lives here because SiteMap CHANGES it
-  // and the middle box (built later) SHOWS it
+  // and Content SHOWS it
   const [page, setPage] = useState('home');
 
   return (
@@ -22,7 +23,7 @@ export default function App() {
         </aside>
 
         <main className="frame__main">
-          <div className="box">now showing: {page}</div>
+          <Content page={page} />
           <div className="box">to-do list</div>
         </main>
 

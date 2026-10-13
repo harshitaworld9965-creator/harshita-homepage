@@ -1,0 +1,64 @@
+.content {
+  min-height: 280px;
+}
+
+/* the content area: everything stacked with even spacing */
+.content__inner {
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* the big "entering the park…" heading on the home page */
+.content__big {
+  font-family: var(--cute);
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  color: var(--pink);
+  text-align: center;
+  margin: 0.25rem 0 0.5rem;
+  text-shadow: 2px 2px 0 var(--pink-light);
+}
+
+.content strong {
+  color: var(--pink);
+  font-weight: normal; /* DotGothic16 has no bold — colour does the emphasis instead */
+}
+
+/* small, quiet text */
+.content__note {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* diary and guestbook entries look like lined notepaper */
+.content__entry {
+  padding: 0.6rem 0.8rem;
+  border: 2px dashed var(--pink);
+  border-radius: 8px;
+  line-height: 24px;
+  /* a faint pink line every 24px — matches line-height, so text sits ON the lines */
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 23px,
+      var(--pink-light) 23px 24px
+    ),
+    var(--white);
+}
+
+.content__entry h3 {
+  font-family: var(--cute);
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--pink);
+}
+
+/* links get a little hover lift */
+.content a {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.content a:hover {
+  transform: translateX(4px);
+}

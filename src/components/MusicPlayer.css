@@ -1,0 +1,97 @@
+.player {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.player__cd {
+  width: 90px;
+  filter: drop-shadow(2px 3px 0 rgba(90, 74, 94, 0.25));
+}
+
+/* the little LCD screen: a window that hides the text outside it */
+.player__screen {
+  width: 100%;
+  height: 26px;
+  overflow: hidden;
+  background: var(--mint-light);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: inset 2px 2px 0 rgba(90, 74, 94, 0.15); /* looks sunk into the player */
+}
+
+.player__title {
+  line-height: 22px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* the scrolling text: starts just off the right edge, ends just off the left */
+.player__scroll {
+  display: inline-block;
+  padding-left: 100%;          /* 100% of the SCREEN's width = start off to the right */
+  animation: marquee 7s linear infinite;
+  animation-play-state: paused; /* frozen until the player is playing */
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-100%); /* 100% of the TEXT's own width = slide fully off the left */
+  }
+}
+
+/* the equaliser: five bars that grow from the bottom */
+.player__eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.player__eq span {
+  width: 6px;
+  height: 100%;
+  background: var(--pink);
+  transform-origin: bottom; /* scale from the bottom edge, like real level meters */
+  animation: eq 0.7s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+/* each bar on its own rhythm */
+.player__eq span:nth-child(2) { animation-delay: -0.2s; background: var(--mint); }
+.player__eq span:nth-child(3) { animation-delay: -0.45s; background: var(--peach); }
+.player__eq span:nth-child(4) { animation-delay: -0.1s; background: var(--mint); }
+.player__eq span:nth-child(5) { animation-delay: -0.6s; }
+
+@keyframes eq {
+  from { transform: scaleY(0.25); }
+  to   { transform: scaleY(1); }
+}
+
+/* ONE class on the player switches every CSS animation inside it on */
+.player.is-playing .player__scroll,
+.player.is-playing .player__eq span {
+  animation-play-state: running;
+}
+
+.player__controls {
+  display: flex;
+  gap: 10px;
+}
+
+/* round, squishy buttons */
+.player__btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 13px;
+  color: var(--white);
+  background: var(--pink);
+  border: 2px solid var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.player__btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--ink);
+}

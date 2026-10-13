@@ -1,23 +1,24 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import './MusicPlayer.css';
 
+// change the titles to match the songs you downloaded
 const SONGS = [
-  'strawberry soda — mochi beats',
-  'rainy day tulips — lofi club',
-  'pug parade — 8-bit orchestra',
+  { title: 'strawberry soda — mochi beats', src: '/music/song-1.mp3' },
+  { title: 'rainy day tulips — lofi club', src: '/music/song-2.mp3' },
+  { title: 'pug parade — 8-bit orchestra', src: '/music/song-3.mp3' },
 ];
 
 export default function MusicPlayer() {
   const root = useRef(null);
-  const spin = useRef(null); // the CD's spin tween, so the buttons can control it
+  const spin = useRef(null);  // the CD's spin tween
+  const audio = useRef(null); // the <audio> element, so the buttons can control it
   const [playing, setPlaying] = useState(false);
   const [track, setTrack] = useState(0);
 
   const { contextSafe } = useGSAP(
     () => {
-      // build the spin once, but don't start it: paused: true
       spin.current = gsap.to('.player__cd', {
         rotation: 360,
         duration: 3,
@@ -29,12 +30,18 @@ export default function MusicPlayer() {
     { scope: root }
   );
 
+  // when the song changes while we're playing, start the new one
+  useEffect(() => {
+    if (playing) {
+      audio.current.play().catch(() => {});
+    }
+  }, [track]); // runs every time `track` changes
+
   const toggle = contextSafe(() => {
-    // stop any spin-up/spin-down that's still in progress, so they can't fight
     gsap.killTweensOf(spin.current);
 
     if (playing) {
-      // slow down to a stop, THEN pause
+      audio.current.pause();
       gsap.to(spin.current, {
         timeScale: 0,
         duration: 1.2,
@@ -42,7 +49,7 @@ export default function MusicPlayer() {
         onComplete: () => spin.current.pause(),
       });
     } else {
-      // start from speed 0, then speed up
+      audio.current.play().catch(() => {});
       spin.current.timeScale(0).play();
       gsap.to(spin.current, { timeScale: 1, duration: 1.2, ease: 'power2.in' });
     }
@@ -51,7 +58,7 @@ export default function MusicPlayer() {
   });
 
   const next = contextSafe(() => {
-    setTrack((t) => (t + 1) % SONGS.length); // 0 → 1 → 2 → back to 0
+    setTrack((t) => (t + 1) % SONGS.length);
     gsap.fromTo(
       '.player__title',
       { y: -14, opacity: 0 },
@@ -63,12 +70,14 @@ export default function MusicPlayer() {
     <div className={`box player ${playing ? 'is-playing' : ''}`} ref={root}>
       <span className="pill">click 4 music!</span>
 
+      {/* the real sound. invisible — our own buttons control it */}
+      <audio ref={audio} src={SONGS[track].src} onEnded={next} preload="none" />
+
       <img className="player__cd" src="/img/cd.png" alt="" />
 
-      {/* outer: GSAP drops it in on "next". inner: CSS scrolls the text */}
       <div className="player__screen">
         <div className="player__title">
-          <span className="player__scroll">♪ {SONGS[track]}</span>
+          <span className="player__scroll">♪ {SONGS[track].title}</span>
         </div>
       </div>
 
