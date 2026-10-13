@@ -1,21 +1,28 @@
+import { useState } from 'react';
 import './App.css';
 import Banner from './components/Banner.jsx';
+import Blinkies from './components/Blinkies.jsx';
+import SiteMap from './components/SiteMap.jsx';
+import MusicPlayer from './components/MusicPlayer.jsx';
 
 export default function App() {
+  // which page the middle box shows. lives here because SiteMap CHANGES it
+  // and the middle box (built later) SHOWS it
+  const [page, setPage] = useState('home');
+
   return (
     <div className="page">
       <div className="frame">
         <Banner />
-
-        <div className="frame__strip box">blinkies</div>
+        <Blinkies />
 
         <aside className="frame__left">
-          <div className="box">site map</div>
-          <div className="box">music player</div>
+          <SiteMap active={page} onChange={setPage} />
+          <MusicPlayer />
         </aside>
 
         <main className="frame__main">
-          <div className="box">welcome / about / diary…</div>
+          <div className="box">now showing: {page}</div>
           <div className="box">to-do list</div>
         </main>
 

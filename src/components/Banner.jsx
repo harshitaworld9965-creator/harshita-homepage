@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-// import './Banner.css';
+import './Banner.css';
 
 const TITLE = "harshita's homepage";
 

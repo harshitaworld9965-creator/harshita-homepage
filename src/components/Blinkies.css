@@ -1,0 +1,45 @@
+/* the strip: a window that hides everything outside it */
+.blinkies {
+  padding: 6px 0;          /* undo .box's side padding so blinkies run edge to edge */
+  overflow: hidden;        /* the track is wider than the strip — crop it */
+}
+
+/* the track: one long row, as wide as all its blinkies put together */
+.blinkies__track {
+  display: flex;
+  width: max-content;      /* don't squash to fit the strip — be as wide as the content */
+  list-style: none;
+}
+
+/* one blinkie: an 88×31-style badge */
+.blinkie {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 31px;
+  padding: 0 12px;
+  margin-right: 8px;       /* margin on EVERY item, not gap — see below */
+  white-space: nowrap;     /* never wrap text onto two lines */
+  font-size: 12px;
+  color: var(--ink);
+  /* top-to-bottom shine from this blinkie's two colours */
+  background: linear-gradient(to bottom, var(--from), var(--to));
+  border: 1px solid var(--ink);
+  box-shadow: inset 0 0 0 1px var(--white); /* thin white line just inside the border */
+}
+
+/* the little icon blinks, like real old-web blinkies */
+.blinkie__icon {
+  animation: icon-blink 1.2s steps(1) infinite;
+}
+
+/* every other blinkie's icon is half a beat behind, so they don't all flash together */
+.blinkie:nth-child(even) .blinkie__icon {
+  animation-delay: -0.6s;
+}
+
+@keyframes icon-blink {
+  50% {
+    opacity: 0.25;
+  }
+}

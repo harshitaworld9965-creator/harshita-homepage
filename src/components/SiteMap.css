@@ -1,0 +1,57 @@
+/* the list is the "positioned parent" for the heart, so offsetTop is measured from here */
+.sitemap__list {
+  position: relative;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+/* the heart floats at the top-left; GSAP slides it down with y */
+.sitemap__heart {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--pink);
+  pointer-events: none;
+}
+
+/* each link: icon + text in a row, with room on the left for the heart */
+.sitemap__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 6px 4px 20px;
+  border-radius: 6px;
+  text-align: left;
+  /* look like an old-school blue underlined link, even though it's a button */
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: background 0.2s;
+}
+
+.sitemap__link:hover {
+  background: var(--mint-light);
+}
+
+.sitemap__link.is-active {
+  color: var(--pink);
+  text-decoration: none;
+  background: var(--pink-light);
+}
+
+/* keyboard users see a cute dashed ring when they Tab to a link */
+.sitemap__link:focus-visible {
+  outline: 2px dashed var(--pink);
+  outline-offset: 2px;
+}
+
+.sitemap__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;            /* never squash the icon, even if the text is long */
+  image-rendering: pixelated; /* keep pixel icons crisp when scaled */
+}
