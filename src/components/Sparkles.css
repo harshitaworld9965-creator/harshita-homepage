@@ -1,0 +1,17 @@
+/* a see-through layer over the whole screen that never blocks clicks */
+.sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  top: 0;
+  left: 0; /* GSAP moves it from here with x and y */
+  font-size: 14px;
+  line-height: 1;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+}

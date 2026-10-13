@@ -1,0 +1,71 @@
+.todo__list {
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  counter-reset: todo; /* start a CSS counter for the numbers */
+}
+
+.todo__item {
+  position: relative;  /* the stamp positions against this */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 8px;
+  text-align: left;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.todo__item:hover {
+  background: var(--mint-light);
+}
+
+/* CSS writes the "1." "2." "3." itself */
+.todo__item::before {
+  counter-increment: todo;
+  content: counter(todo) '.';
+  color: var(--pink);
+  min-width: 1.4em;
+}
+
+.todo__text {
+  transition: color 0.3s, text-decoration-color 0.3s;
+  text-decoration: line-through;
+  text-decoration-color: transparent; /* the line is always there, just invisible */
+  text-decoration-thickness: 2px;
+}
+
+.todo__item.is-done .todo__text {
+  color: rgba(90, 74, 94, 0.45);
+  text-decoration-color: var(--pink); /* …so it can FADE in instead of popping */
+}
+
+/* the rubber stamp */
+.todo__stamp {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  margin-top: -0.7em;
+  padding: 0 6px;
+  font-family: var(--cute);
+  font-size: 0.75rem;
+  color: var(--pink);
+  border: 2px solid var(--pink);
+  border-radius: 4px;
+  transform: rotate(-12deg);
+  opacity: 0;          /* hidden unless done */
+  pointer-events: none;
+}
+
+/* items that start as done show their stamp immediately */
+.todo__item.is-done .todo__stamp {
+  opacity: 1;
+}
+
+.todo__count {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  text-align: right;
+  color: var(--pink);
+}

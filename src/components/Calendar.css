@@ -1,0 +1,58 @@
+/* 7 equal columns, one per weekday */
+.cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.cal__weekday {
+  color: var(--white);
+  background: var(--mint);
+  border-radius: 3px;
+}
+
+/* the first column is Sunday — pink, like the reference */
+.cal__weekday:first-child {
+  background: var(--pink);
+}
+
+.cal__day {
+  position: relative;
+  aspect-ratio: 1; /* square cells */
+  display: grid;
+  place-items: center;
+  background: var(--cream);
+  border-radius: 3px;
+}
+
+/* every 7th cell starting from the 8th = each Sunday (after the 7 weekday labels) */
+.cal__grid > :nth-child(7n + 8) {
+  color: var(--pink);
+}
+
+.cal__day.is-today {
+  background: var(--pink-light);
+}
+
+/* the beating heart sits behind today's number */
+.cal__heart {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  color: var(--pink);
+}
+
+/* the number sits on top of the heart */
+.cal__num {
+  position: relative;
+  color: var(--white);
+}
+
+/* other days' numbers stay normal */
+.cal__day:not(.is-today) .cal__num {
+  color: inherit;
+}

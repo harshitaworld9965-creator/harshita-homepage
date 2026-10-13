@@ -5,6 +5,12 @@ import Blinkies from './components/Blinkies.jsx';
 import SiteMap from './components/SiteMap.jsx';
 import MusicPlayer from './components/MusicPlayer.jsx';
 import Content from './components/Content.jsx';
+import TodoList from './components/TodoList.jsx';
+import Photo from './components/Photo.jsx';
+import VisitorCounter from './components/VisitorCounter.jsx';
+import Calendar from './components/Calendar.jsx';
+import Footer from './components/Footer.jsx';
+import Sparkles from './components/Sparkles.jsx';
 
 export default function App() {
   // which page the middle box shows. lives here because SiteMap CHANGES it
@@ -24,17 +30,20 @@ export default function App() {
 
         <main className="frame__main">
           <Content page={page} />
-          <div className="box">to-do list</div>
+          <TodoList />
         </main>
 
         <aside className="frame__right">
-          <div className="box">photo</div>
-          <div className="box">visitor counter</div>
-          <div className="box">calendar</div>
+          <Photo />
+          <VisitorCounter />
+          <Calendar />
         </aside>
 
-        <footer className="frame__footer box">footer</footer>
+        <Footer />
       </div>
+
+      {/* outside the frame: it covers the whole screen */}
+      <Sparkles />
     </div>
   );
 }

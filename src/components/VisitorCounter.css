@@ -1,0 +1,40 @@
+.counter {
+  text-align: center;
+}
+
+.counter__label {
+  font-size: 0.85rem;
+  color: var(--link);
+}
+
+.counter__digits {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+/* each digit sits in its own shiny bubble, like the reference */
+.counter__digit {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-family: var(--cute);
+  font-size: 0.9rem;
+  color: var(--white);
+  text-shadow: 1px 1px 0 rgba(90, 74, 94, 0.4);
+  /* a white "shine" spot in the top-left, over the pink */
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0 15%, transparent 16%),
+    var(--pink);
+  border: 2px solid var(--ink);
+}
+
+/* alternate colours, like candy */
+.counter__digit:nth-child(even) {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0 15%, transparent 16%),
+    var(--mint);
+}

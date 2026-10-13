@@ -1,0 +1,50 @@
+.photo {
+  display: grid;
+  place-items: center;
+  padding: 1rem 0.75rem;
+}
+
+/* a polaroid: white frame, thicker at the bottom for the caption */
+.photo__polaroid {
+  padding: 8px 8px 0;
+  background: var(--white);
+  border: 1px solid rgba(90, 74, 94, 0.2);
+  box-shadow: 2px 4px 8px rgba(90, 74, 94, 0.2);
+  transform: rotate(-4deg);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); /* a CSS "back.out" */
+}
+
+.photo__polaroid:hover {
+  transform: rotate(2deg) scale(1.06);
+}
+
+/* a strip of washi tape holding it to the page */
+.photo__polaroid::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 60px;
+  height: 20px;
+  margin-left: -30px;
+  background: rgba(168, 224, 160, 0.7);
+  transform: rotate(3deg);
+}
+
+.photo__polaroid {
+  position: relative; /* so the tape positions against the polaroid */
+}
+
+.photo__img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.photo__caption {
+  padding: 6px 0 8px;
+  font-family: var(--cute);
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--pink);
+}
