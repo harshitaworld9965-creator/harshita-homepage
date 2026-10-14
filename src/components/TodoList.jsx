@@ -4,11 +4,14 @@ import { useGSAP } from '@gsap/react';
 import './TodoList.css';
 
 const START = [
-  { id: 1, text: 'make the gingham background', done: true },
-  { id: 2, text: 'build the blinkie strip', done: true },
-  { id: 3, text: 'make the cd spin', done: true },
-  { id: 4, text: 'finish the calendar', done: false },
-  { id: 5, text: 'deploy it!!', done: false },
+  { id: 1, text: 'finish my law degree', done: true },
+  { id: 2, text: 'learn react + gsap', done: true },
+  { id: 3, text: 'build a cute homepage', done: true },
+  { id: 4, text: 'launch my portfolio', done: false },
+  { id: 5, text: 'post my projects on instagram', done: false },
+  { id: 6, text: 'get a design engineer job', done: false },
+  { id: 7, text: 'make a site that wins an award', done: false },
+  { id: 8, text: 'adopt a pug 🐶', done: false },
 ];
 
 export default function TodoList() {
